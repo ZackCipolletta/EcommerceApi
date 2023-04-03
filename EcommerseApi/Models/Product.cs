@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcommerseApi.Models
 {
@@ -7,11 +8,13 @@ namespace EcommerseApi.Models
   {
 
     public int ProductId { get; set; }
+    public string Brand { get; set; }
     public string Type { get; set; }
     public string Name { get; set; }
     public int Price { get; set; }
     public string Description { get; set; }
     public string ShortDescription { get; set; }
+    public string ImageLink { get; set; }
     public virtual List<Review> Reviews { get; set; }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

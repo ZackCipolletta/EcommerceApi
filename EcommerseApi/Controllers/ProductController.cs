@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 using EcommerseApi.Models;
 
 namespace EcommerseApi.Controllers
 {
-  [Authorize]
+
   [Route("api/[controller]")]
   [ApiController]
   public class ProductsController : ControllerBase
