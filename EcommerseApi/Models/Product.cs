@@ -15,6 +15,7 @@ namespace EcommerseApi.Models
     public string Description { get; set; }
     public string ShortDescription { get; set; }
     public string ImageLink { get; set; }
+    public int InStock { get; set; }
     public virtual List<Review> Reviews { get; set; }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
