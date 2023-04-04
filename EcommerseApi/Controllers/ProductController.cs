@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EcommerseApi.Models;
+using EcommerseApi.Wrappers;
+using EcommerseApi.Filter;
 
 namespace EcommerseApi.Controllers
 {
@@ -18,7 +20,7 @@ namespace EcommerseApi.Controllers
 
     // GET api/products
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> Get(string type, string name, string search)
+    public async Task<ActionResult<IEnumerable<Product>>> Get([FromQuery] PaginationFilter filter, string type, string name, string search)
     {
       IQueryable<Product> query = _db.Products.Include(product => product.Reviews).AsQueryable();
 
@@ -51,7 +53,13 @@ namespace EcommerseApi.Controllers
         products = products.OrderByDescending(products => products.ReviewCount).ToList();
       }
 
-      return products;
+      var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+
+      var pagedData = await _db.Products.Skip((validFilter.PageNumber - 1) * validFilter.PageSize).Take(validFilter.PageSize).ToListAsync();
+
+      var totalRecords = await _db.Products.CountAsync();
+
+      return Ok(new PagedResponse<List<Product>>(pagedData,validFilter.PageNumber,validFilter.PageSize));
     }
 
 
