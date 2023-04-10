@@ -17,55 +17,42 @@
 * Authentication
 
 ## Description
+  This Api was built to be a back end database containing products for another repo: https://github.com/jb24x7/CsharpTeamWeek/tree/main/E-Commerce_website.  This Api contains the products that are fetched from the db and populated on the website.
 
 
 ## Setup/Installation Requirements
 
-<!-- 1. Clone this repo.
-2. Open your terminal (e.g., Terminal or GitBash) and navigate to this project's production directory named "ParksLookup".
-3. Create a file named ['appsettings.json'] in the production directory (ParksLookup) and include a new database connection string. The string should be as follows:
+1. Clone this repo.
+2. Open your terminal (e.g., Terminal or GitBash) and navigate to this project's production directory named "EcommerseAPI".
+3. Create a file named ['appsettings.json'] in the production directory (EcommerseAPI) and include a new database connection string. The string should be as follows:
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=localhost;Port=3306[Or-Your-Desired-Port-Number];database=[DATABASE-NAME-HERE];uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];",
   }
 }
 Create a database name, update username and password to match the username and password of your computer.
-4. Enter 'dotnet ef database update' in the terminal inside the production directory (this will create the database schema in MySQL which the application will access later), enter 'dotnet run' or 'dotnet watch run' in the command line to start the project in development mode with a watcher (Optionally, you can run "dotnet build" to compile the app without running it). 
-5. First you will need to register a user. Using Postman send a POST request to: http://localhost:5114/api/Account/regsiter. In the body of the request send:
-  {
-    "userName": "string",
-    "password": "string"
-  }
-6. Once a user is registered they are able to login by sending a POST request to: http://localhost:5114/api/Account/login. In the body of the request send:
-  {
-    "userName": "string",
-    "password": "string"
-  }
-7. Once you are logged in users can send POST requests to /api/Parks with the body:
+4. Copy the file labeled export3.sql to your desktop. Open MySQL Workbench, under the Administration tab, select Data Import/Restore. Then select the option to Import from Self-Contained File and select the export3.sql file copied to the desktop. Under teh section labeled "Default Target Schema, enter the name of the database you have chosen in appsettings.json.  This will import the db with all the products.  
+
+5. Using Postman users can send POST requests to /api/Products with the body:
   {  
-    "type": "string", (type of park such as National or State)
-    "location": "string", (State)
-    "name": "string"
+    "brand": ["string"],
+    "type": ["string"],
+    "name": ["string"],
+    "price": [integer],
+    "description": ["string]",
+    "shortDescription": ["string]",
+    "imageLink": ["string"]
   }
-8. Users are also able to send a GET request to /api/Parks to retrieve all parks in the database.
-9. Users can send a GET request with a specific id to get a specific park: /api/Parks/{id}.
+8. Users are also able to send a GET request to /api/Products to retrieve products in the database. The db has pagination enabled, so only 10 products will be shown at a time.  To see the next page, enter the query api/products/?pageNumber=[Page-Number-Here]
 10. Users are able to update entries in the database by sending a PUT request to: /api/Parks{id} with the body:
   {  
-    "parkId": {id},
-    "type": "string",
-    "location": "string",
-    "name": "string"
+    "productId": {id},
+    "brand": ["string"],
+    "type": []"string"],
+    "location": ["string"],
+    "name": ["string"]
   }
-11. Users are also able to delete entries by sending a DELETE request to /ap/Parks/{id}.
-12. Users are able to create reviews by sending a POST request to /api/Reviews with the body:
-  {
-    "parkId": 0,
-    "title": "string",
-    "description": "string",
-    "userName": "string"
-  }
-13. Users are also able to see all reviews, edit and delete reviews by following the same convention for parks with with the appropriate body. -->
-
+11. Users are also able to delete entries by sending a DELETE request to /ap/Products/{id}.
 
 ## Known Bugs
 *No known bugs at this time.
